@@ -2,108 +2,460 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>AdSense Test Page</title>
+    <title>Simple Life Blog – Practical Tips & Guides</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <!-- AdSense script (replace client ID with yours) -->
+    <meta name="description" content="Simple Life Blog shares practical tips, how-to guides, and personal experiences to help you live better every day." />
     <meta name="google-adsense-account" content="ca-pub-2427301594235726">
-    <script async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
-            crossorigin="anonymous"></script>
-
     <style>
+        :root {
+            --bg: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --accent: #2563eb;
+            --accent-soft: #eff6ff;
+            --border-subtle: #e5e7eb;
+            --radius: 10px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             margin: 0;
-            padding: 20px;
-            background: #f3f4f6;
-        }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-        }
-        h1 {
-            margin-top: 0;
-            text-align: center;
-        }
-        .section {
-            margin: 30px 0;
-        }
-        .section h2 {
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-            color: #374151;
-        }
-        .placeholder-text {
-            color: #6b7280;
-            font-size: 0.95rem;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
             line-height: 1.6;
         }
-        .ad-wrapper {
-            border: 1px dashed #d1d5db;
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid var(--border-subtle);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .nav {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--accent);
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-text span:first-child {
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .brand-text span:last-child {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 16px;
+            font-size: 14px;
+        }
+
+        .nav-links a {
+            padding: 6px 10px;
+            border-radius: 999px;
+        }
+
+        .nav-links a:hover {
+            background: var(--accent-soft);
+            text-decoration: none;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 16px 40px;
+            display: grid;
+            grid-template-columns: minmax(0, 2.3fr) minmax(0, 1fr);
+            gap: 24px;
+        }
+
+        .hero-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
+        }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 11px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-pill span:last-child {
+            color: var(--text-muted);
+            font-weight: 500;
+            text-transform: none;
+            letter-spacing: normal;
+        }
+
+        .hero-card h1 {
+            margin: 14px 0 8px;
+            font-size: 26px;
+        }
+
+        .hero-meta {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        .hero-card p {
+            margin: 0 0 12px;
+            font-size: 15px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            border: none;
+            background: var(--accent);
+            color: #ffffff;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            filter: brightness(1.05);
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 16px;
+        }
+
+        .article-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 16px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .article-card h2 {
+            font-size: 18px;
+            margin: 0 0 6px;
+        }
+
+        .article-card .meta {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .article-card p {
+            margin: 0 0 10px;
+            font-size: 14px;
+            color: #374151;
+        }
+
+        .article-card a.read-more {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* Sidebar */
+
+        aside {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .sidebar-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 16px;
+            border: 1px solid var(--border-subtle);
+            font-size: 14px;
+        }
+
+        .sidebar-card h3 {
+            margin-top: 0;
+            font-size: 15px;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tag {
+            padding: 4px 8px;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            font-size: 12px;
+        }
+
+        .sidebar-meta {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .footer {
+            border-top: 1px solid var(--border-subtle);
+            padding: 16px;
+            font-size: 13px;
+            color: var(--text-muted);
+            text-align: center;
+            background: #ffffff;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+        }
+
+        /* Simple “ad placeholder” style (use this later for real ads) */
+
+        .ad-placeholder {
+            border-radius: 8px;
+            border: 1px dashed var(--border-subtle);
             padding: 10px;
-            border-radius: 6px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-muted);
             background: #f9fafb;
+        }
+
+        @media (max-width: 800px) {
+            main {
+                grid-template-columns: minmax(0, 1fr);
+            }
+            .articles-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+            .nav {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>AdSense Test Page</h1>
-    <p class="placeholder-text">
-        This page is for testing how Google AdSense ads appear on your site: layout, responsiveness, and placement.
-    </p>
-
-    <!-- Responsive ad unit -->
-    <div class="section">
-        <h2>Responsive Ad Unit (in-content)</h2>
-        <div class="ad-wrapper">
-            <!-- Replace data-ad-client and data-ad-slot with your own -->
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                 data-ad-slot="YYYYYYYYYY"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+<header>
+    <div class="nav">
+        <div class="brand">
+            <div class="brand-logo">S</div>
+            <div class="brand-text">
+                <span>Simple Life Blog</span>
+                <span>Practical tips for everyday living</span>
+            </div>
         </div>
+        <nav class="nav-links" aria-label="Main navigation">
+            <a href="#articles">Articles</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+            <a href="#privacy">Privacy</a>
+        </nav>
     </div>
+</header>
 
-    <!-- Another example spot: above footer / sidebar style -->
-    <div class="section">
-        <h2>Another Ad Position (e.g., footer or sidebar)</h2>
-        <p class="placeholder-text">
-            You can duplicate the ad block below and place it wherever you want to test additional positions.
-        </p>
-        <div class="ad-wrapper">
-            <!-- You can use the same slot or another slot from AdSense -->
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                 data-ad-slot="ZZZZZZZZZZ"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-    </div>
+<main>
+    <!-- Main content -->
+    <section aria-label="Featured article">
+        <article class="hero-card">
+            <div class="hero-pill">
+                <span>Featured</span>
+                <span>Personal growth · Daily habits</span>
+            </div>
+            <h1>Small Daily Habits That Quietly Improve Your Life</h1>
+            <p class="hero-meta">Written by <strong>Alex</strong> · Updated <time datetime="2025-01-08">January 8, 2025</time></p>
+            <p>
+                A better life rarely comes from one huge change. Instead, it usually comes from small,
+                boring actions repeated consistently. In this article I share the simple routines that
+                helped me feel less overwhelmed, more focused, and a little bit happier every day.
+            </p>
+            <p>
+                None of these ideas require apps, fancy tools, or unrealistic morning routines. They’re
+                practical things I tested in my own life while juggling work, family, and side projects.
+            </p>
+            <button class="btn-primary" type="button">
+                Read the full guide
+                <span aria-hidden="true">→</span>
+            </button>
+        </article>
 
-    <div class="section">
-        <h2>Notes</h2>
-        <ul class="placeholder-text">
-            <li>Replace all <code>ca-pub-XXXXXXXXXXXXXXXX</code> with your actual publisher ID.</li>
-            <li>Replace <code>data-ad-slot="YYYYYYYYYY"</code> and <code>"ZZZZZZZZZZ"</code> with your real ad unit IDs.</li>
-            <li>Upload this file to your server or open it via your domain where AdSense is approved.</li>
-            <li>Do not repeatedly refresh or click on your own ads.</li>
-        </ul>
+
+        <section id="articles" aria-label="Latest articles" style="margin-top: 24px;">
+            <h2 style="margin-bottom: 10px; font-size: 20px;">Latest articles</h2>
+            <div class="articles-grid">
+                <article class="article-card">
+                    <h2>How to Build a Simple Morning Routine That Actually Sticks</h2>
+                    <div class="meta">Routines · 5 min read</div>
+                    <p>
+                        Most morning routines fail because we try to copy someone else’s schedule.
+                        In this article, I show how to design a routine that fits your real life,
+                        not a fantasy version of it.
+                    </p>
+                    <a class="read-more" href="#">Read more →</a>
+                </article>
+
+                <article class="article-card">
+                    <h2>Decluttering Your Home Without Throwing Everything Away</h2>
+                    <div class="meta">Home · 6 min read</div>
+                    <p>
+                        You don’t need to live in an empty white room to feel calm. Learn a practical,
+                        non-extreme approach to decluttering that respects your memories and your space.
+                    </p>
+                    <a class="read-more" href="#">Read more →</a>
+                </article>
+
+                <article class="article-card">
+                    <h2>Simple Budgeting Tricks for People Who Hate Spreadsheets</h2>
+                    <div class="meta">Money · 7 min read</div>
+                    <p>
+                        If traditional budgeting never worked for you, try these low-friction methods
+                        to understand where your money goes and stay out of debt.
+                    </p>
+                    <a class="read-more" href="#">Read more →</a>
+                </article>
+
+                <article class="article-card">
+                    <h2>Staying Focused in a Distracting World</h2>
+                    <div class="meta">Focus · 4 min read</div>
+                    <p>
+                        Constant notifications and multitasking make deep work almost impossible.
+                        These small changes helped me concentrate better without quitting technology.
+                    </p>
+                    <a class="read-more" href="#">Read more →</a>
+                </article>
+            </div>
+        </section>
+    </section>
+
+    <!-- Sidebar -->
+    <aside aria-label="Sidebar">
+        <section class="sidebar-card" id="about">
+            <h3>About this site</h3>
+            <p>
+                Simple Life Blog is a personal project where I share lessons and experiments about
+                routines, money, focus, and home life. Every article is based on real experiences,
+                not copied lists from somewhere else.
+            </p>
+            <p class="sidebar-meta">
+                I’m not a coach or guru. I’m just someone trying to live a little simpler and
+                document what actually works.
+            </p>
+        </section>
+
+        <section class="sidebar-card">
+            <h3>Popular topics</h3>
+            <div class="tag-list">
+                <span class="tag">Daily habits</span>
+                <span class="tag">Routines</span>
+                <span class="tag">Money</span>
+                <span class="tag">Focus</span>
+                <span class="tag">Home</span>
+                <span class="tag">Mindset</span>
+            </div>
+        </section>
+
+
+        <section class="sidebar-card" id="contact">
+            <h3>Contact</h3>
+            <p>
+                If you’d like to share feedback or suggest a topic, you can reach me at:
+            </p>
+            <p>
+                Email: <a href="mailto:youremail@example.com">youremail@example.com</a><br />
+            </p>
+            <p class="sidebar-meta">
+                I read every message, but I may not be able to reply to all of them.
+            </p>
+        </section>
+
+        <section class="sidebar-card" id="privacy">
+            <h3>Privacy & transparency</h3>
+            <p>
+                This site may use cookies and third-party services (including advertising partners)
+                to understand basic visitor statistics and keep the site running.
+            </p>
+            <p>
+                I do not sell personal information or collect unnecessary data. For details,
+                please read the full privacy policy page once it is published on this site.
+            </p>
+        </section>
+    </aside>
+</main>
+
+<footer class="footer">
+    <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#">Terms</a>
     </div>
-</div>
+    <div>© <span id="year"></span> Simple Life Blog. All rights reserved.</div>
+</footer>
+
+<script>
+    // Set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
